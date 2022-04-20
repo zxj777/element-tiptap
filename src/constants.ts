@@ -14,6 +14,8 @@ export const DEFAULT_IMAGE_URL_REGEX = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]
 export const DEFAULT_IMAGE_WIDTH = 200;
 export const DEFAULT_IMAGE_DISPLAY = ImageDisplay.INLINE;
 
+export const LINK_REGEX = /(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*))$/g;
+
 export const LINE_HEIGHT_100 = 1.7;
 export const DEFAULT_LINE_HEIGHT = '100%';
 

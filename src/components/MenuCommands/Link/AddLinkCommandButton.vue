@@ -2,7 +2,7 @@
   <div>
     <command-button
       :is-active="editorContext.isActive.link()"
-      :readonly="et.isCodeViewMode"
+      :readonly="et.isCodeViewMode || !hasContentSelected"
       :command="openAddLinkDialog"
       :enable-tooltip="et.tooltip"
       :tooltip="et.t('editor.extensions.Link.add.tooltip')"
@@ -20,6 +20,8 @@
         :model="linkAttrs"
         label-position="right"
         size="small"
+        :rules="rules"
+        ref="form"
       >
         <el-form-item
           :label="et.t('editor.extensions.Link.add.control.href')"
@@ -66,6 +68,7 @@ import { Component, Prop, Inject, Vue, Watch } from 'vue-property-decorator';
 import { Dialog, Form, FormItem, Input, Checkbox, Button } from 'element-ui';
 import { MenuData } from 'tiptap';
 import CommandButton from '../CommandButton.vue';
+import { linkLimitRule } from '@/utils/validate';
 
 @Component({
   components: {
@@ -91,15 +94,28 @@ export default class AddLinkCommandButton extends Vue {
 
   addLinkDialogVisible = false;
 
+  rules = {
+    href: [linkLimitRule()]
+  }
+
+  get hasContentSelected() {
+    const { from, to } = (this.editorContext.editor as any).selection;
+    return (from - to) !== 0;
+  }
+
   @Watch('addLinkDialogVisible', { immediate: true })
   onDialogVisibleChange() {
     this.linkAttrs = { href: '', openInNewTab: true };
   }
 
   private addLink() {
-    this.editorContext.commands.link(this.linkAttrs);
+    (this.$refs.form as Form).validate(valid => {
+      if (valid) {
+        this.editorContext.commands.link(this.linkAttrs);
 
-    this.closeAddLinkDialog();
+        this.closeAddLinkDialog();
+      }
+    });
   }
 
   private openAddLinkDialog() {

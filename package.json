@@ -1,5 +1,5 @@
 {
-  "name": "element-tiptap",
+  "name": "element-tiptap-magic",
   "version": "1.27.1",
   "description": "🌸A modern WYSIWYG rich-text editor using tiptap and Element UI for Vue.js",
   "author": "leecason",
@@ -17,8 +17,7 @@
   "unpkg": "lib/element-tiptap.min.js",
   "jsdelivr": "lib/element-tiptap.min.js",
   "files": [
-    "lib/*",
-    "src/*"
+    "lib/*"
   ],
   "types": "lib/index.d.ts",
   "dependencies": {
@@ -116,6 +115,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Leecason/element-tiptap.git"
+    "url": "https://github.com/zxj777/element-tiptap.git"
   }
 }

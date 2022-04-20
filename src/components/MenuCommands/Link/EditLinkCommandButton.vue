@@ -18,6 +18,8 @@
         :model="linkAttrs"
         label-position="right"
         size="small"
+        :rules="rules"
+        ref="form"
       >
         <el-form-item
           :label="et.t('editor.extensions.Link.edit.control.href')"
@@ -64,6 +66,7 @@ import { Component, Prop, Inject, Vue } from 'vue-property-decorator';
 import { Dialog, Form, FormItem, Input, Checkbox, Button } from 'element-ui';
 import { MenuData } from 'tiptap';
 import CommandButton from '../CommandButton.vue';
+import { linkLimitRule } from '@/utils/validate';
 
 @Component({
   components: {
@@ -94,10 +97,18 @@ export default class EditLinkCommandButton extends Vue {
   linkAttrs = this.initLinkAttrs;
   editLinkDialogVisible = false;
 
-  private updateLinkAttrs() {
-    this.editorContext.commands.link(this.linkAttrs);
+  rules = {
+    href: [linkLimitRule()]
+  }
 
-    this.closeEditLinkDialog();
+  private updateLinkAttrs() {
+    (this.$refs.form as Form).validate(valid => {
+      if (valid) {
+        this.editorContext.commands.link(this.linkAttrs);
+
+        this.closeEditLinkDialog();
+      }
+    });
   }
 
   private openEditLinkDialog() {
