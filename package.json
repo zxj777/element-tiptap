@@ -17,7 +17,8 @@
   "unpkg": "lib/element-tiptap.min.js",
   "jsdelivr": "lib/element-tiptap.min.js",
   "files": [
-    "lib/*"
+    "lib/*",
+    "src/*"
   ],
   "types": "lib/index.d.ts",
   "dependencies": {
