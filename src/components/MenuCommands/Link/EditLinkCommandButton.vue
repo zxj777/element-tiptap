@@ -98,7 +98,7 @@ export default class EditLinkCommandButton extends Vue {
   editLinkDialogVisible = false;
 
   rules = {
-    href: [linkLimitRule()]
+    href: [linkLimitRule(this.editorContext.editor.extensions.options.link.linkRegex)]
   }
 
   private updateLinkAttrs() {

@@ -95,7 +95,7 @@ export default class AddLinkCommandButton extends Vue {
   addLinkDialogVisible = false;
 
   rules = {
-    href: [linkLimitRule()]
+    href: [linkLimitRule(this.editorContext.editor.extensions.options.link.linkRegex)]
   }
 
   get hasContentSelected() {

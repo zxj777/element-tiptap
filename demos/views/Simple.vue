@@ -57,7 +57,7 @@ export default {
         new Italic({ bubble: true }),
         new Strike({ bubble: true }),
         new Code(),
-        new Link({ bubble: true }),
+        new Link({ bubble: true, linkRegex: /https?:\/\// }),
         new Image(),
         new Blockquote(),
         new TextAlign(),
